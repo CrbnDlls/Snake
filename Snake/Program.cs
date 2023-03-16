@@ -34,13 +34,11 @@ namespace Snake
         private static void ApplyConsoleSettings(int width, int height)
         {
             Console.OutputEncoding = Encoding.Unicode;
-
-            
-
-            DrawBorder(width, height);
-
             Console.CursorVisible = false;
 
+            Border border = new Border(width, height);
+            border.Draw();
+            
             DisplayWelcomeScreen(width, height);
             Console.SetCursorPosition(1, 1);
         }
@@ -68,38 +66,7 @@ namespace Snake
                 }
             }
         }
-
-        private static void DrawBorder(int width, int height)
-        {
-            Console.Write('\u2554'); //╔
-
-            for (int i = 1; i < width; i++)
-            {
-                Console.Write('\u2550'); // ═
-            }
-
-            Console.Write('\u2557'); // ╗
-
-            for (int j = 1; j < height; j++)
-            {
-                Console.SetCursorPosition(0, j);
-                Console.Write('\u2551'); // ║
-                Console.SetCursorPosition(width, j);
-                Console.Write('\u2551'); // ║
-            }
-
-            Console.SetCursorPosition(0, height);
-
-            Console.Write('\u255A'); //╚
-
-            for (int i = 1; i < width; i++)
-            {
-                Console.Write('\u2550'); // ═
-            }
-
-            Console.Write('\u255D'); // ╝
-        }
-
+                
         private static void StartNewGame(int width, int height)
         {
             ClearConsole(width, height);
