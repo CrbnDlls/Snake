@@ -28,6 +28,7 @@ namespace Snake
                 else if (consoleKey == ConsoleKey.F2) 
                 {
                     StartNewGame(width, height);
+                    Console.ReadKey();
                     DisplayWelcomeScreen(width, height);
                 }
 
@@ -48,6 +49,8 @@ namespace Snake
 
         private static void DisplayWelcomeScreen(int width, int height)
         {
+            ClearConsole(width, height);
+
             Console.SetCursorPosition((width / 2 - 14), (height / 2 - 1));
 
             Console.WriteLine("Press F2 to start a new Game");
@@ -118,7 +121,35 @@ namespace Snake
                 }
                 
                 Thread.Sleep(100);
-                snake.Move(direction);
+                try
+                {
+                    snake.Move(direction);
+                }
+                catch (SnakeBiteTailException)
+                {
+                    Console.SetCursorPosition((width / 2 - 5), (height / 2 - 1));
+
+                    Console.WriteLine("Game Over");
+
+                    Console.SetCursorPosition((width / 2 - 14), (height / 2 + 1));
+
+                    Console.WriteLine("You have bitten your tail !!!");
+
+                    break;
+                }
+                catch (SnakeHitBorderException)
+                {
+                    Console.SetCursorPosition((width / 2 - 5), (height / 2 - 1));
+
+                    Console.WriteLine("Game Over");
+
+                    Console.SetCursorPosition((width / 2 - 14), (height / 2 + 1));
+
+                    Console.WriteLine("You have hit the border !!!");
+
+                    break;
+                }
+                
             }
 
         }

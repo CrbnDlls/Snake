@@ -11,12 +11,29 @@ namespace Snake
     internal class Snake : Shape
     {
         private Direction _direction;
+        private readonly int _width;
+        private readonly int _height;
         public Snake(int width, int height)
         {
+            _width = width;
+            _height = height;
             for (int i = 0; i < 5; i++)
             {
                 Point point = new Point((width / 2 - 3) + i, height / 2, '*');
                 _points.Add(point);
+            }
+        }
+
+        private void ValidateSnakeHead(Point head)
+        {
+            if (head.X == 0 || head.Y == 0 || head.X == _width - 1 || head.Y == _height - 1)
+            {
+                throw new SnakeHitBorderException();
+            }
+            
+            if (_points.Any(x => x.Compare(head)))
+            {
+                throw new SnakeBiteTailException();
             }
         }
 
@@ -56,6 +73,8 @@ namespace Snake
                     newHead.Y += 1;
                     break;
             }
+
+            ValidateSnakeHead(newHead);
 
             _points.Add(newHead);
             newHead.Draw();
