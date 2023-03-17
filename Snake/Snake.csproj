@@ -47,6 +47,8 @@
     <Compile Include="Enums\CornerType.cs" />
     <Compile Include="Enums\Direction.cs" />
     <Compile Include="FoodFactory.cs" />
+    <Compile Include="Helpers\GameOverHelper.cs" />
+    <Compile Include="Helpers\ScoreHelper.cs" />
     <Compile Include="Point.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,10 +1,4 @@
 ﻿using Snake.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Remoting.Metadata.W3cXsd2001;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Snake
 {
@@ -52,7 +46,7 @@ namespace Snake
     }
 
     internal class HorisontalLine : Shape
-    { 
+    {
         public HorisontalLine(int length, int x, int y)
         {
             for (int i = 0; i < length; i++)
@@ -100,5 +94,5 @@ namespace Snake
             _points.Add(point);
         }
     }
-    
+
 }
