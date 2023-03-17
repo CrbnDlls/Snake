@@ -46,6 +46,7 @@
     <Compile Include="Border.cs" />
     <Compile Include="Enums\CornerType.cs" />
     <Compile Include="Enums\Direction.cs" />
+    <Compile Include="FoodFactory.cs" />
     <Compile Include="Point.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

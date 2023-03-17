@@ -79,8 +79,18 @@ namespace Snake
 
             Direction direction = Direction.Right;
 
+            FoodFactory foodFactory = new FoodFactory();
+            Point food = foodFactory.GetFood(width, height);
+            food.Draw();
+
             while(true)
             {
+                if (snake.Eat(food))
+                {
+                    food = foodFactory.GetFood(width, height);
+                    food.Draw();
+                }
+
                 if (Console.KeyAvailable)
                 {
                     ConsoleKeyInfo keyInfo = Console.ReadKey();

@@ -10,6 +10,7 @@ namespace Snake
 {
     internal class Snake : Shape
     {
+        private Direction _direction;
         public Snake(int width, int height)
         {
             for (int i = 0; i < 5; i++)
@@ -19,12 +20,28 @@ namespace Snake
             }
         }
 
+        public bool Eat(Point food)
+        {
+            Point head = _points.Last();
+            if (head.Compare(food))
+            {
+                _points.Insert(0, food);
+                return true;
+            }
+            return false;
+        }
+
         public void Move(Direction direction)
         {
+            if (!IsOposite(direction))
+            {
+                _direction = direction;
+            }
+
             Point head = _points.Last();
             Point newHead = new Point(head);
 
-            switch (direction)
+            switch (_direction)
             {
                 case Direction.Left:
                     newHead.X -= 1;
@@ -45,6 +62,26 @@ namespace Snake
             Point tail = _points.First();
             tail.Clear();
             _points.Remove(tail);
+        }
+
+        private bool IsOposite(Direction direction)
+        {
+            switch (direction)
+            {
+                case Direction.Left:
+                    if (_direction == Direction.Right) return true;
+                    break;
+                case Direction.Right:
+                    if (_direction == Direction.Left) return true;
+                    break;
+                case Direction.Down:
+                    if (_direction == Direction.Up) return true;
+                    break;
+                case Direction.Up:
+                    if (_direction == Direction.Down) return true;
+                    break;
+            }
+            return false;
         }
 
     }
