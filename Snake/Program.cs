@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Snake.Enums;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Snake
@@ -26,6 +28,7 @@ namespace Snake
                 else if (consoleKey == ConsoleKey.F2) 
                 {
                     StartNewGame(width, height);
+                    DisplayWelcomeScreen(width, height);
                 }
 
             }
@@ -57,9 +60,9 @@ namespace Snake
         private static void ClearConsole(int width, int height)
         {
             
-            for (int i = 1; i < height; i++)
+            for (int i = 1; i < height - 1; i++)
             {
-                for (int j = 1; j < width; j++)
+                for (int j = 1; j < width - 1; j++)
                 {
                     Console.SetCursorPosition(j, i);
                     Console.Write(" ");
@@ -72,6 +75,42 @@ namespace Snake
             ClearConsole(width, height);
 
             Snake snake = new Snake(width,height);
+            snake.Draw();
+
+            Direction direction = Direction.Right;
+
+            while(true)
+            {
+                if (Console.KeyAvailable)
+                {
+                    ConsoleKeyInfo keyInfo = Console.ReadKey();
+
+                    if (keyInfo.Key == ConsoleKey.F12)
+                    { 
+                        break;
+                    }
+
+                    switch (keyInfo.Key) 
+                    {
+                        case ConsoleKey.UpArrow:
+                            direction = Direction.Up;
+                            break;
+                        case ConsoleKey.DownArrow:
+                            direction = Direction.Down;
+                            break;
+                        case ConsoleKey.LeftArrow:
+                            direction = Direction.Left;
+                            break;
+                        case ConsoleKey.RightArrow:
+                            direction = Direction.Right;
+                            break;
+                    }
+                }
+                
+                Thread.Sleep(100);
+                snake.Move(direction);
+            }
+
         }
     }
 }
